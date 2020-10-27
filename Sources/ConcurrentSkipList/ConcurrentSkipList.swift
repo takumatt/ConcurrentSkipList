@@ -183,7 +183,7 @@ extension ConcurrentSkipList {
   
   // MARK: - Inspecting a list
   
-  public func isEmpty() -> Bool {
+  public var isEmpty: Bool {
     elementNode.next[0] == nil
   }
   
