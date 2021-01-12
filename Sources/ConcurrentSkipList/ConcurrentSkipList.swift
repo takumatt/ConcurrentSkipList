@@ -36,6 +36,19 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
   
   public var count: Int
   
+  public var array: [Element<Key, Value>] {
+    
+    var result: [Element<Key, Value>] = []
+    var element = first
+    
+    while element != nil {
+      result.append(element!)
+      element = element?.elementNode.next[0]
+    }
+    
+    return result
+  }
+  
   private var elementNode: ElementNode<Key, Value>
   private var maxLevel: Int
   private let probability: Double

@@ -53,6 +53,23 @@ final class ConcurrentSkipListTests: XCTestCase {
     }
   }
   
+  func testArray() {
+    
+    XCTContext.runActivity(named: "basic") { _ in
+      
+      let skipList: ConcurrentSkipList<Int, Int> = .init()
+      let num = 20
+      var ary: [Int] = []
+      
+      for i in 0 ..< num {
+        let _ = skipList.insert(key: i, value: i)
+        ary.append(i)
+      }
+      
+      XCTAssertEqual(skipList.array.map(\.value), ary)
+    }
+  }
+  
   func testExtension() {
     
     XCTContext.runActivity(named: "Inspecting") { _ in
