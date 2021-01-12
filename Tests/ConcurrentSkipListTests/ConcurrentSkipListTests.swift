@@ -62,7 +62,7 @@ final class ConcurrentSkipListTests: XCTestCase {
       var ary: [Int] = []
       
       for i in 0 ..< num {
-        let _ = skipList.insert(key: i, value: i)
+        skipList.insert(key: i, value: i)
         ary.append(i)
       }
       
@@ -77,7 +77,7 @@ final class ConcurrentSkipListTests: XCTestCase {
       XCTContext.runActivity(named: "isEmpty") { _ in
         let skipList: ConcurrentSkipList<String, Int> = .init()
         XCTAssertTrue(skipList.isEmpty)
-        let _ = skipList.insert(key: "\(1)", value: 1)
+        skipList.insert(key: "\(1)", value: 1)
         XCTAssertFalse(skipList.isEmpty)
       }
     }
@@ -87,7 +87,7 @@ final class ConcurrentSkipListTests: XCTestCase {
        XCTContext.runActivity(named: "contains") { _ in
         let skipList: ConcurrentSkipList<String, Int> = .init()
         XCTAssertFalse(skipList.contains(key: "\(1)"))
-        let _ = skipList.insert(key: "\(1)", value: 1)
+        skipList.insert(key: "\(1)", value: 1)
         XCTAssertTrue(skipList.contains(key: "\(1)"))
        }
     }
@@ -111,7 +111,7 @@ final class ConcurrentSkipListTests: XCTestCase {
         let skipList: ConcurrentSkipList<String, Int> = .init()
         
         (0 ..< 10).forEach { i in
-          let _ = skipList.insert(key: "\(i)", value: i)
+          skipList.insert(key: "\(i)", value: i)
         }
         
         XCTAssertEqual(
@@ -125,13 +125,13 @@ final class ConcurrentSkipListTests: XCTestCase {
         let skipList: ConcurrentSkipList<String, Int> = .init()
         
         (0 ..< 10).forEach { i in
-          let _ = skipList.insert(key: "\(i)", value: i)
+          skipList.insert(key: "\(i)", value: i)
         }
         
         XCTAssertTrue(skipList.contains(key: "\(0)"))
         XCTAssertEqual(skipList.first?.key, "\(0)")
         
-        let _ = skipList.removeFirst()
+        skipList.removeFirst()
         
         XCTAssertFalse(skipList.contains(key: "\(0)"))
         XCTAssertEqual(skipList.first?.key, "\(1)")
@@ -142,7 +142,7 @@ final class ConcurrentSkipListTests: XCTestCase {
         let skipList: ConcurrentSkipList<String, Int> = .init()
         
         (0 ..< 10).forEach { i in
-          let _ = skipList.insert(key: "\(i)", value: i)
+          skipList.insert(key: "\(i)", value: i)
         }
         
         XCTAssertFalse(skipList.isEmpty)

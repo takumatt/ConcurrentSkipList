@@ -73,6 +73,7 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
     self.probTable = Self.probabilityTable(probability: config.probability, maxLevel: config.maxLevel)
   }
   
+  @discardableResult
   public func insert(key: Key, value: Value) -> Element<Key, Value>? {
     
     lock.lock()
@@ -101,6 +102,7 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
     return element
   }
   
+  @discardableResult
   public func remove(key: Key) -> Element<Key, Value>? {
     
     lock.lock()
