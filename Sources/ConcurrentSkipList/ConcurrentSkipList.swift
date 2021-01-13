@@ -36,6 +36,19 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
   
   public var count: Int
   
+  public var array: [Element<Key, Value>] {
+    
+    var result: [Element<Key, Value>] = []
+    var element = first
+    
+    while element != nil {
+      result.append(element!)
+      element = element?.elementNode.next[0]
+    }
+    
+    return result
+  }
+  
   private var elementNode: ElementNode<Key, Value>
   private var maxLevel: Int
   private let probability: Double
@@ -60,6 +73,7 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
     self.probTable = Self.probabilityTable(probability: config.probability, maxLevel: config.maxLevel)
   }
   
+  @discardableResult
   public func insert(key: Key, value: Value) -> Element<Key, Value>? {
     
     lock.lock()
@@ -88,6 +102,7 @@ public final class ConcurrentSkipList<Key: Comparable, Value> {
     return element
   }
   
+  @discardableResult
   public func remove(key: Key) -> Element<Key, Value>? {
     
     lock.lock()
